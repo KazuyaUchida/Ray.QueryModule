@@ -39,7 +39,7 @@ final class Query
      */
     public $type = 'row_list';
 
-    /** @SuppressWarnings(PHPMd.BooleanArgumentFlag) */
+    /** @SuppressWarnings(PHPMD.BooleanArgumentFlag) */
     public function __construct(string $id, string $type = 'row_list', bool $templated = false)
     {
         $this->id = $id;
