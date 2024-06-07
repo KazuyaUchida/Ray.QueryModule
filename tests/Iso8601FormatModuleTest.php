@@ -35,6 +35,7 @@ class Iso8601FormatModuleTest extends TestCase
             public function __construct(ExtendedPdo $pdo)
             {
                 $this->pdo = $pdo;
+
                 parent::__construct();
             }
 

@@ -26,6 +26,7 @@ class WebQueryModule extends AbstractModule
     {
         $this->guzzleConfig = $guzzleConfig;
         $this->webQueryConfig = $webQueryConfig;
+
         parent::__construct($module);
     }
 
@@ -52,7 +53,7 @@ class WebQueryModule extends AbstractModule
                 [
                     'method' => $prefixedName . '-method',
                     'uri' => $prefixedName . '-uri',
-                ]
+                ],
             );
         $this
             ->bind()
@@ -62,7 +63,7 @@ class WebQueryModule extends AbstractModule
                 [
                     'method' => $prefixedName . '-method',
                     'uri' => $prefixedName . '-uri',
-                ]
+                ],
             );
         $this
             ->bind(RowInterface::class)
@@ -72,7 +73,7 @@ class WebQueryModule extends AbstractModule
                 [
                     'method' => $prefixedName . '-method',
                     'uri' => $prefixedName . '-uri',
-                ]
+                ],
             );
         $this
             ->bind(RowListInterface::class)
@@ -82,7 +83,7 @@ class WebQueryModule extends AbstractModule
                 [
                     'method' => $prefixedName . '-method',
                     'uri' => $prefixedName . '-uri',
-                ]
+                ],
             );
         $this->bind()->annotatedWith($prefixedName . '-method')->toInstance($method);
         $this->bind()->annotatedWith($prefixedName . '-uri')->toInstance($uri);
@@ -97,7 +98,7 @@ class WebQueryModule extends AbstractModule
             ->bind(ClientInterface::class)
             ->toConstructor(
                 Client::class,
-                ['config' => GuzzleConfig::class]
+                ['config' => GuzzleConfig::class],
             )->in(Scope::SINGLETON);
         $this->bind()->annotatedWith(GuzzleConfig::class)->toInstance($this->guzzleConfig);
     }

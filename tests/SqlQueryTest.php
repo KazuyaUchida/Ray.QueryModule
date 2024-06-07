@@ -8,6 +8,7 @@ use Aura\Sql\ExtendedPdo;
 use PDO;
 use PHPUnit\Framework\TestCase;
 
+use function assert;
 use function file_get_contents;
 use function is_array;
 
@@ -57,7 +58,7 @@ class SqlQueryTest extends TestCase
                 'id' => 2,
                 'title' => 'test',
             ],
-            ['id' => 2]
+            ['id' => 2],
         ))[0];
         assert(is_array($row));
         assert(isset($row['title']));

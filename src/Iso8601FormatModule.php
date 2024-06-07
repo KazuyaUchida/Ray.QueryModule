@@ -11,12 +11,11 @@ class Iso8601FormatModule extends AbstractModule
     /** @var array<string> */
     private $datetimeColumns;
 
-    /**
-     * @param array<string> $datetimeColumns
-     */
+    /** @param array<string> $datetimeColumns */
     public function __construct(array $datetimeColumns, ?AbstractModule $module = null)
     {
         $this->datetimeColumns = $datetimeColumns;
+
         parent::__construct($module);
     }
 
@@ -26,10 +25,10 @@ class Iso8601FormatModule extends AbstractModule
         $this->bindInterceptor(
             $this->matcher->logicalOr(
                 $this->matcher->subclassesOf(SqlQueryRow::class),
-                $this->matcher->subclassesOf(SqlQueryRowList::class)
+                $this->matcher->subclassesOf(SqlQueryRowList::class),
             ),
             $this->matcher->startsWith('__invoke'),
-            [Iso8601Interceptor::class]
+            [Iso8601Interceptor::class],
         );
     }
 }

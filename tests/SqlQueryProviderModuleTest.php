@@ -53,9 +53,7 @@ class SqlQueryProviderModuleTest extends TestCase
         $this->todoTest($todo);
     }
 
-    /**
-     * @requires PHP 8.1
-     */
+    /** @requires PHP 8.1 */
     public function testProviderInjectAttr(): void
     {
         $injector = new Injector($this->module, __DIR__ . '/tmp');

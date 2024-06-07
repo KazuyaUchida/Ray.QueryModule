@@ -15,12 +15,11 @@ class PhpQueryModule extends AbstractModule
     /** @var iterable<string, mixed> */
     private $configs;
 
-    /**
-     * @param iterable<string, mixed> $configs
-     */
+    /** @param iterable<string, mixed> $configs */
     public function __construct(iterable $configs, ?AbstractModule $module = null)
     {
         $this->configs = $configs;
+
         parent::__construct($module);
     }
 
@@ -33,9 +32,7 @@ class PhpQueryModule extends AbstractModule
         }
     }
 
-    /**
-     * @param mixed $binding
-     */
+    /** @param mixed $binding */
     private function bindQuery(string $name, $binding): void
     {
         if (is_string($binding) && class_exists($binding) && (new ReflectionClass($binding))->implementsInterface(QueryInterface::class)) {

@@ -31,6 +31,7 @@ class SqlQueryModule extends AbstractModule
         $this->getSql = $getSql ?? static function (SplFileInfo $fileInfo): string {
             return (string) file_get_contents($fileInfo->getPathname());
         };
+
         parent::__construct($module);
     }
 
@@ -46,7 +47,7 @@ class SqlQueryModule extends AbstractModule
             $sqlId = 'sql-' . $name;
             $this->bind(QueryInterface::class)->annotatedWith($name)->toConstructor(
                 SqlQueryRowList::class,
-                "sql=$sqlId"
+                "sql=$sqlId",
             );
             $this->bindCallableItem($name, $sqlId);
             $this->bindCallableList($name, $sqlId);
@@ -58,14 +59,14 @@ class SqlQueryModule extends AbstractModule
         $this->bindInterceptor(
             $this->matcher->any(),
             $this->matcher->annotatedWith(Query::class),
-            [QueryInterceptor::class]
+            [QueryInterceptor::class],
         );
         // <=0.4.0
         /** @psalm-suppress DeprecatedClass */
         $this->bindInterceptor(
             $this->matcher->any(),
             $this->matcher->annotatedWith(AliasQuery::class),
-            [SqlAliasInterceptor::class]
+            [SqlAliasInterceptor::class],
         );
     }
 
@@ -73,7 +74,7 @@ class SqlQueryModule extends AbstractModule
     {
         $this->bind(RowInterface::class)->annotatedWith($name)->toConstructor(
             SqlQueryRow::class,
-            "sql=$sqlId"
+            "sql=$sqlId",
         );
     }
 
@@ -81,29 +82,27 @@ class SqlQueryModule extends AbstractModule
     {
         $this->bind()->annotatedWith($name)->toConstructor(
             SqlQueryRowList::class,
-            "sql=$sqlId"
+            "sql=$sqlId",
         );
         $this->bind(RowListInterface::class)->annotatedWith($name)->toConstructor(
             SqlQueryRowList::class,
-            "sql=$sqlId"
+            "sql=$sqlId",
         );
     }
 
-    /**
-     * @psalm-suppress ArgumentTypeCoercion
-     */
+    /** @psalm-suppress ArgumentTypeCoercion */
     private function files(string $dir): RegexIterator
     {
         return new RegexIterator(
             new RecursiveIteratorIterator(
                 new RecursiveDirectoryIterator(
                     $dir,
-                    FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::SKIP_DOTS
+                    FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::SKIP_DOTS,
                 ),
-                RecursiveIteratorIterator::LEAVES_ONLY
+                RecursiveIteratorIterator::LEAVES_ONLY,
             ),
             '/^.+\.sql$/',
-            RecursiveRegexIterator::MATCH
+            RecursiveRegexIterator::MATCH,
         );
     }
 }

@@ -6,6 +6,7 @@ namespace Ray\Query;
 
 use PHPUnit\Framework\TestCase;
 use Ray\Aop\ReflectiveMethodInvocation;
+
 use function assert;
 use function is_array;
 
@@ -14,9 +15,7 @@ class Iso8601InterceptorTest extends TestCase
     public function testDateTimeFieldConvertedIso8601(): void
     {
         $object = new class {
-            /**
-             * @return array<array<string>>
-             */
+            /** @return array<array<string>> */
             public function run(): array
             {
                 return [

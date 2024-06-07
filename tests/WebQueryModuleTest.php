@@ -7,6 +7,7 @@ namespace Ray\Query;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
+
 use function assert;
 use function is_array;
 

@@ -22,9 +22,7 @@ final class SqlFinder
     /** @var SqlDir */
     private $sqlDir;
 
-    /**
-     * @param ParamReaderInterface<object> $reader
-     */
+    /** @param ParamReaderInterface<object> $reader */
     public function __construct(
         ParamReaderInterface $reader,
         SqlDir $sqlDir
