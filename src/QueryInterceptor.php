@@ -96,7 +96,7 @@ class QueryInterceptor implements MethodInterceptor
     private function templated(Query $query, array $namedArguments): array
     {
         $url = parse_url(uri_template($query->id, $namedArguments));
-        if (! isset($url['path'])) { // @phpstan-ignore-line
+        if (! isset($url['path'])) {
             throw new InvalidArgumentException($query->id);
         }
 

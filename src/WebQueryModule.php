@@ -32,7 +32,7 @@ class WebQueryModule extends AbstractModule
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->configureClient();
         foreach ($this->webQueryConfig as $name => $value) {

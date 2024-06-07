@@ -9,6 +9,7 @@ use PDO;
 use PHPUnit\Framework\TestCase;
 
 use function file_get_contents;
+use function is_array;
 
 class SqlQueryTest extends TestCase
 {
@@ -32,6 +33,9 @@ class SqlQueryTest extends TestCase
         $sql = (string) file_get_contents(__DIR__ . '/Fake/sql/todo_item_by_id.sql');
         $query = new SqlQueryRowList($this->pdo, $sql);
         $row = ((array) $query(['id' => 1]))[0];
+        assert(is_array($row));
+        assert(isset($row['title']));
+        assert(isset($row['id']));
         $this->assertSame('run', $row['title']);
         $this->assertSame('1', $row['id']);
     }
@@ -55,6 +59,9 @@ class SqlQueryTest extends TestCase
             ],
             ['id' => 2]
         ))[0];
+        assert(is_array($row));
+        assert(isset($row['title']));
+        assert(isset($row['id']));
         $this->assertSame('test', $row['title']);
         $this->assertSame('2', $row['id']);
     }

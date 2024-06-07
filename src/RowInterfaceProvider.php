@@ -8,6 +8,9 @@ use Aura\Sql\ExtendedPdoInterface;
 use Ray\Di\InjectionPointInterface;
 use Ray\Di\ProviderInterface;
 
+/**
+ * @implements ProviderInterface<RowInterface>
+ */
 final class RowInterfaceProvider implements ProviderInterface
 {
     /** @var InjectionPointInterface */

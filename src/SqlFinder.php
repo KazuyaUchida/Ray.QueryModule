@@ -43,7 +43,7 @@ final class SqlFinder
 
         $file = sprintf('%s/%s.sql', $this->sqlDir->value, $sqlAnnotation->sql);
         if (! file_exists($file)) {
-            $msg = sprintf('%s:%s', $param, $file);
+            $msg = sprintf('%s:%s', (string) $param, $file);
 
             throw new SqlFileNotFoundException($msg);
         }
