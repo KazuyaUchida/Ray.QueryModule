@@ -46,13 +46,13 @@ class SqlQueryModule extends AbstractModule
             $sqlId = 'sql-' . $name;
             $this->bind(QueryInterface::class)->annotatedWith($name)->toConstructor(
                 SqlQueryRowList::class,
-                "sql={$sqlId}"
+                "sql=$sqlId"
             );
             $this->bindCallableItem($name, $sqlId);
             $this->bindCallableList($name, $sqlId);
 
             $sql = (string) ($this->getSql)($fileInfo);
-            $this->bind('')->annotatedWith($sqlId)->toInstance($sql);
+            $this->bind()->annotatedWith($sqlId)->toInstance($sql);
         }
 
         $this->bindInterceptor(
@@ -73,7 +73,7 @@ class SqlQueryModule extends AbstractModule
     {
         $this->bind(RowInterface::class)->annotatedWith($name)->toConstructor(
             SqlQueryRow::class,
-            "sql={$sqlId}"
+            "sql=$sqlId"
         );
     }
 
@@ -81,11 +81,11 @@ class SqlQueryModule extends AbstractModule
     {
         $this->bind()->annotatedWith($name)->toConstructor(
             SqlQueryRowList::class,
-            "sql={$sqlId}"
+            "sql=$sqlId"
         );
         $this->bind(RowListInterface::class)->annotatedWith($name)->toConstructor(
             SqlQueryRowList::class,
-            "sql={$sqlId}"
+            "sql=$sqlId"
         );
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ray\Query;
 
 use BEAR\Resource\ResourceObject;
+use InvalidArgumentException;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Ray\Aop\ReflectionMethod;
@@ -33,7 +34,7 @@ class SqlAliasInterceptor implements MethodInterceptor
         /** @var AliasQuery $aliasQuery */
         $aliasQuery = $method->getAnnotation(AliasQuery::class);
         $namedArguments = (array) $invocation->getNamedArguments();
-        list($queryId, $params) = $aliasQuery->templated ? $this->templated($aliasQuery, $namedArguments) : [$aliasQuery->id, $namedArguments];
+        [$queryId, $params] = $aliasQuery->templated ? $this->templated($aliasQuery, $namedArguments) : [$aliasQuery->id, $namedArguments];
         $interface = $aliasQuery->type === 'row' ? RowInterface::class : RowListInterface::class;
         $query = $this->injector->getInstance($interface, $queryId);
         if ($query instanceof QueryInterface) {
@@ -76,7 +77,7 @@ class SqlAliasInterceptor implements MethodInterceptor
     {
         $url = parse_url(uri_template($aliasQuery->id, $namedArguments));
         if (! $url) {
-            throw new \InvalidArgumentException($aliasQuery->id);
+            throw new InvalidArgumentException($aliasQuery->id);
         }
         $queryId = $url['path'];
         isset($url['query']) ? parse_str($url['query'], $params) : $params = $namedArguments;

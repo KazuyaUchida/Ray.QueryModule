@@ -22,7 +22,7 @@ class Iso8601FormatModule extends AbstractModule
 
     protected function configure()
     {
-        $this->bind('')->annotatedWith('iso8601_date_time_columns')->toInstance($this->datetimeColumns);
+        $this->bind()->annotatedWith('iso8601_date_time_columns')->toInstance($this->datetimeColumns);
         $this->bindInterceptor(
             $this->matcher->logicalOr(
                 $this->matcher->subclassesOf(SqlQueryRow::class),
