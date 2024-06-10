@@ -137,9 +137,7 @@ class SqlQueryModuleTest extends TestCase
         return $fakeAlias;
     }
 
-    /**
-     * @depends testSqlAliasInterceptorWithNamed
-     */
+    /** @depends testSqlAliasInterceptorWithNamed */
     public function testTempalteError(FakeAliasNamed $ro): void
     {
         $this->expectException(InvalidArgumentException::class);

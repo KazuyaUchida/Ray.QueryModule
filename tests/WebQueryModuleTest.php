@@ -8,6 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 
+use function assert;
+use function is_array;
+
 class WebQueryModuleTest extends TestCase
 {
     /** @var AbstractModule */
@@ -28,6 +31,8 @@ class WebQueryModuleTest extends TestCase
         $foo = (new Injector($this->module, __DIR__ . '/tmp'))->getInstance(QueryInterface::class, 'foo');
         $this->assertInstanceOf(QueryInterface::class, $foo);
         $result = $foo([]);
+        assert(is_array($result));
+        assert(isset($result['url']));
         $this->assertSame('https://httpbin.org/anything/foo', $result['url']);
     }
 

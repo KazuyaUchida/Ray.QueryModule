@@ -26,9 +26,7 @@ class QueryInterceptor implements MethodInterceptor
         $this->injector = $injector;
     }
 
-    /**
-     * @return ResourceObject|mixed
-     */
+    /** @return ResourceObject|mixed */
     public function invoke(MethodInvocation $invocation)
     {
         $method = $invocation->getMethod();
@@ -64,9 +62,7 @@ class QueryInterceptor implements MethodInterceptor
         return $result;
     }
 
-    /**
-     * @param mixed $result
-     */
+    /** @param mixed $result */
     private function returnRo(ResourceObject $ro, MethodInvocation $invocation, $result): ResourceObject
     {
         if (! $result) {
@@ -96,7 +92,7 @@ class QueryInterceptor implements MethodInterceptor
     private function templated(Query $query, array $namedArguments): array
     {
         $url = parse_url(uri_template($query->id, $namedArguments));
-        if (! isset($url['path'])) { // @phpstan-ignore-line
+        if (! isset($url['path'])) {
             throw new InvalidArgumentException($query->id);
         }
 
